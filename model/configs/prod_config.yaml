@@ -1,0 +1,19 @@
+model: yolo11s.pt
+
+epochs: 50
+
+imgsz: 640
+
+batch: 16
+
+workers: 8
+
+device: 0
+
+project: model/runs
+
+name: baseline_yolo11s
+
+pretrained: true
+
+verbose: true

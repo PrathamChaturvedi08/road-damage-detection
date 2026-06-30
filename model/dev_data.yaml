@@ -1,0 +1,12 @@
+path: C:/Projects/road-damage-detection/datasets/rdd2022_dev
+
+train: train/images
+val: val/images
+test: test/images
+
+names:
+  0: longitudinal_crack
+  1: transverse_crack
+  2: alligator_crack
+  3: other_corruption
+  4: pothole

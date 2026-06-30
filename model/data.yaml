@@ -1,4 +1,4 @@
-path: ../datasets/rdd2022
+path: C:/Projects/road-damage-detection/datasets/rdd2022
 
 train: train/images
 val: val/images
