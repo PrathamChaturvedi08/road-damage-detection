@@ -1,6 +1,23 @@
+# Python
 venv/
 __pycache__/
 *.pyc
-runs/
+
+# Dataset
 datasets/
+
+# YOLO Training Outputs
+runs/
+
+# Environment Variables
 .env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
