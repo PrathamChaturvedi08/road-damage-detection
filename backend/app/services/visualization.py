@@ -1,4 +1,5 @@
 from pathlib import Path
+from uuid import uuid4
 
 import cv2
 
@@ -11,11 +12,19 @@ def save_prediction_image(
 
     annotated = prediction.plot()
 
-    output_path = output_dir / filename
+    extension = Path(filename).suffix
+
+    stem = Path(filename).stem
+
+    unique_filename = (
+        f"{stem}_{uuid4().hex[:8]}{extension}"
+    )
+
+    output_path = output_dir / unique_filename
 
     cv2.imwrite(
         str(output_path),
         annotated
     )
 
-    return output_path
+    return unique_filename

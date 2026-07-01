@@ -13,6 +13,21 @@ class Detection(BaseModel):
     bbox: List[float]
 
 
+class Assessment(BaseModel):
+
+    roadvision_score: int
+
+    condition: str
+
+    severity_score: int
+
+    average_confidence: float
+
+    total_detections: int
+
+    damage_counts: Dict[str, int]
+
+
 class PredictionResponse(BaseModel):
 
     filename: str
@@ -21,13 +36,8 @@ class PredictionResponse(BaseModel):
 
     detections: List[Detection]
 
-    damage_counts: Dict[str, int]
-
-    severity_score: int
-
-    total_detections: int
+    assessment: Assessment
 
     processing_time: float
 
     status: str
-    

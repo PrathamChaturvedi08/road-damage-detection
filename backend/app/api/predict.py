@@ -54,32 +54,60 @@ def predict_image(file: UploadFile = File(...)):
 
     metrics = calculate_metrics(detections)
 
-    annotated_path = save_prediction_image(
+    annotated_filename = save_prediction_image(
+
         prediction["prediction"],
+
         file.filename,
+
         ANNOTATED_DIR
+
     )
 
-    annotated_image = f"/outputs/annotated/{file.filename}"
+    annotated_image = (
+        f"/outputs/annotated/{annotated_filename}"
+    )
 
     end = time.time()
 
     return PredictionResponse(
 
-    filename=file.filename,
+        filename=file.filename,
 
-    annotated_image=annotated_image,
+        annotated_image=annotated_image,
 
-    detections=detections,
+        detections=detections,
 
-    damage_counts=metrics["damage_counts"],
+        inspection_summary={
 
-    severity_score=metrics["severity_score"],
+            "roadvision_score":
 
-    total_detections=metrics["total_detections"],
+            metrics["roadvision_score"],
 
-    processing_time=round(end-start,3),
+            "condition":
 
-    status="Success"
+            metrics["condition"],
 
-)
+            "severity_score":
+
+            metrics["severity_score"],
+
+            "average_confidence":
+
+            metrics["average_confidence"],
+
+            "total_detections":
+
+            metrics["total_detections"],
+
+            "damage_counts":
+
+            metrics["damage_counts"],
+
+        },
+
+        processing_time=round(end - start, 3),
+
+        status="Success",
+
+    )
