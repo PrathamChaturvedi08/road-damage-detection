@@ -16,4 +16,27 @@ def predict(image_path: Path):
         verbose=False
     )
 
-    return results[0]
+    result = results[0]
+
+    detections = []
+
+    for box in result.boxes:
+
+        class_id = int(box.cls[0])
+
+        detections.append({
+
+            "class_id": class_id,
+
+            "class_name": result.names[class_id],
+
+            "confidence": round(float(box.conf[0]), 3),
+
+            "bbox": [
+                round(float(x), 2)
+                for x in box.xyxy[0]
+            ]
+
+        })
+
+    return detections

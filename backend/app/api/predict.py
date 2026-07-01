@@ -12,6 +12,8 @@ from app.services.detector import predict
 from app.utils.paths import ALLOWED_EXTENSIONS
 from app.utils.paths import UPLOAD_DIR
 
+from app.services.metrics import calculate_metrics
+
 
 router = APIRouter(
     prefix="/predict",
@@ -42,17 +44,26 @@ def predict_image(file: UploadFile = File(...)):
 
     start = time.time()
 
-    results = predict(image_path)
+    detections = predict(image_path)
+
+    metrics = calculate_metrics(detections)
 
     end = time.time()
 
     return PredictionResponse(
 
-        filename=file.filename,
+    filename=file.filename,
 
-        detections=len(results.boxes),
+    detections=detections,
 
-        processing_time=round(end - start, 3),
+    damage_counts=metrics["damage_counts"],
 
-        status="Success"
-    )
+    severity_score=metrics["severity_score"],
+
+    total_detections=metrics["total_detections"],
+
+    processing_time=round(end-start,3),
+
+    status="Success"
+
+)
