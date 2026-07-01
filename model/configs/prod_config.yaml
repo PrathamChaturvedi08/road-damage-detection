@@ -1,5 +1,7 @@
 model: yolo11s.pt
 
+data: model/configs/data.yaml
+
 epochs: 50
 
 imgsz: 640

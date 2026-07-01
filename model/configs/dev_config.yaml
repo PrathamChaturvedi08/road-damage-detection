@@ -1,5 +1,7 @@
 model: yolo11n.pt
 
+data: model/configs/dev_data.yaml
+
 epochs: 5
 
 imgsz: 640
@@ -12,7 +14,7 @@ device: cpu
 
 project: model/runs
 
-name: baseline_yolo11n_dev
+name: baseline_yolo11n
 
 pretrained: true
 
