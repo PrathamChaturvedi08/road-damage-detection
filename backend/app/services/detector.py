@@ -39,4 +39,10 @@ def predict(image_path: Path):
 
         })
 
-    return detections
+    return {
+
+    "prediction": result,
+
+    "detections": detections
+
+    }

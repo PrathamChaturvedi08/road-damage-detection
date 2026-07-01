@@ -17,6 +17,8 @@ class PredictionResponse(BaseModel):
 
     filename: str
 
+    annotated_image: str
+
     detections: List[Detection]
 
     damage_counts: Dict[str, int]
@@ -28,3 +30,4 @@ class PredictionResponse(BaseModel):
     processing_time: float
 
     status: str
+    

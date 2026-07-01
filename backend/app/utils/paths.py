@@ -24,3 +24,9 @@ ALLOWED_EXTENSIONS = {
     ".jpeg",
     ".png"
 }
+
+ANNOTATED_DIR = OUTPUT_DIR / "annotated"
+
+ANNOTATED_DIR.mkdir(
+    exist_ok=True
+)

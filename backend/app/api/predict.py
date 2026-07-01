@@ -14,6 +14,10 @@ from app.utils.paths import UPLOAD_DIR
 
 from app.services.metrics import calculate_metrics
 
+from app.services.visualization import save_prediction_image
+
+from app.utils.paths import ANNOTATED_DIR
+
 
 router = APIRouter(
     prefix="/predict",
@@ -44,15 +48,27 @@ def predict_image(file: UploadFile = File(...)):
 
     start = time.time()
 
-    detections = predict(image_path)
+    prediction = predict(image_path)
+
+    detections = prediction["detections"]
 
     metrics = calculate_metrics(detections)
+
+    annotated_path = save_prediction_image(
+        prediction["prediction"],
+        file.filename,
+        ANNOTATED_DIR
+    )
+
+    annotated_image = f"/outputs/annotated/{file.filename}"
 
     end = time.time()
 
     return PredictionResponse(
 
     filename=file.filename,
+
+    annotated_image=annotated_image,
 
     detections=detections,
 
